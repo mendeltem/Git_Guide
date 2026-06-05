@@ -340,4 +340,47 @@ up, proving the rule works.
 
 ---
 
+## 9. Branches
+
+A branch is a separate line of work. You make changes on a branch without
+touching `main`, then merge them back when ready. Great for trying things
+out safely.
+
+```bash
+git branch                        # list branches (* marks the current one)
+git switch -c feature             # create a new branch AND switch to it
+git switch main                   # switch back to main
+git switch feature                # switch to an existing branch
+```
+
+`git switch` is the modern command. Older tutorials use
+`git checkout -b feature` (create) and `git checkout main` (switch) – same
+thing.
+
+### Typical branch workflow
+
+```bash
+git switch -c new-recipe          # 1. branch off main
+vim guacamole.md                  # 2. work freely
+git add . && git commit -m "..."  # 3. commit on the branch
+git switch main                   # 4. go back to main
+git merge new-recipe              # 5. merge the work into main
+git branch -d new-recipe          # 6. delete the finished branch
+```
+
+### Pushing a branch to GitHub
+
+```bash
+git push -u origin feature        # push the branch the first time
+git push                          # afterwards just this
+```
+
+> Merging can cause a **conflict** if the same lines changed on both
+> branches. Git marks the spots in the file with `<<<<<<<`, `=======`,
+> `>>>>>>>`. Edit the file to keep what you want, remove the markers, then
+> `git add` and `git commit` to finish the merge.
+
+---
+
+
 *Materials based on the Carpentries course (CC-BY 4.0).*
